@@ -1,0 +1,31 @@
+보통JSP를 사용할떄 war을 사용함
+아닌경우 jar를 보통사용,항상 내장 서버(톰캣)을 사용하고 webapp경로도 사용하지 않는다 내장 서버 사용에 최적화
+되어있는기능이 jar이다.
+war은 내장서버도 사용가능하지만 주로 외부 서버에서 배포하는 목적으로 사용한다.
+
+요청 파라미터 VS HTTP 메시지 바디
+
+요청 파라미터를 조회하는 기능: @ReqeustParam,@ModelAttribute
+Http 메시지 바디를 직접 조회하는기느이 @RequestBody
+
+@RestController
+@Controller 대신 @RestController애노테이션을 사용하면 해당 컨트롤러에 모두 @ResponseBody가 적용되는 효과가 있다 따라서
+뷰템플릿을 사용한ㄴ게 아니라 Http메시지 바디에 직접 데이터를 이용한다 이름 그대로 REST API를 만들때 사용한다. ㅇㅇ
+
+스프링에서 응답 데이터를 만드는 방법은 크게 3가지이다
+1)정적 리소스: 웹 브라우저에 정적인 HTML,CSS,JS를 제공할때는 정적 리소스를사용
+2)뷰템플릿 사용:웹 브라우저에 동적인 HTML을 제공할때 뷰템플릿 사용
+3)HTTP 메시지 사용:HTTP API,REST API를 제공하는 경우 HTML이 아닌 데이터를 전달 해야하므로 HTTP 메시지 바디에 JSON과 같은
+형식으로 데이터를 실어 보낸다.
+
+
+@ResponseBody:
+  Http의 body문자 내용을 직접 반환
+  viewResolver대신 HTTPMessageConvert가 동작
+  기본 문자처리:StringHttpMessageConvert
+  기본 객체 처리:MappingJackson2HttpMessageConvert
+
+
+스프링 MVC는 다음의 경우에 HTTP 메시지 컨버터를 적용한다
+HTTP요청:@ReqeustBody,HttpEntity
+HTTP응답:@ResponseBody,HttpEntity
